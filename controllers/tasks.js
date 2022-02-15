@@ -18,7 +18,6 @@ const deleteTask = (req, res) => {
     res.send('delete a task');
 }
 
-
 module.exports = {
     getAllTasks,
     getTask,
