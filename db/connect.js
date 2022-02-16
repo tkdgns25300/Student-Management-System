@@ -8,6 +8,8 @@ const connectDB = (url) => {
             useFindAndModify: false,
             useUnifiedTopology: true,
         })
+        .then(() => console.log('Connected to the DB...'))
+        .catch(err => console.error(err.message));
 }
 
 module.exports = connectDB;
