@@ -1,8 +1,8 @@
-require('./db/connect');
 const express = require('express');
 const app = express();
 const router = require('./routes/tasks');
 const PORT = 3000;
+const connectDB = require('./db/connect');
 
 // middleware
 app.use(express.json());
@@ -24,6 +24,16 @@ app.use('/api/v1/tasks', router)
 
 // delete a task
 
-app.listen(PORT, () => {
-    console.log(`Server is listening on port ${PORT}...`);
-})
+
+const start = async () => {
+    try {
+        await connectDB(`mongodb+srv://root:tkdgns125@cluster0.yleop.mongodb.net/TASK-MANAGER?retryWrites=true&w=majority`);
+        app.listen(PORT, () => {
+            console.log(`Server is listening on port ${PORT}...`);
+        });
+    } catch (error) {
+        console.error(error.message);
+    }
+}
+
+start();
