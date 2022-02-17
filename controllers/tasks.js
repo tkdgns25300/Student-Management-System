@@ -9,8 +9,16 @@ const getAllTasks = async (req, res) => {
     }
 }
 
-const getTask = (req, res) => {
-    res.json({ id: req.params.id });
+const getTask = async (req, res) => {
+    try {
+        const task = await Task.findOne({ _id: req.params.id });
+        if (!task) {
+            return res.status(404).json({message: `No task with id ${req.params.id}`});
+        }
+        res.status(200).json({ task });
+    } catch (error) {
+        res.status(500).json({ message: error })
+    }
 }
 
 const createTask = async (req, res) => {
