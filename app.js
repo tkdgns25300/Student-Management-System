@@ -4,20 +4,15 @@ const router = require('./routes/tasks');
 const PORT = 3000;
 const connectDB = require('./db/connect');
 require('dotenv').config();
+const notFound = require('./middleware/not-found');
 
 // middleware
 app.use(express.static('./public'));
 app.use(express.json());
 
 // routes
-
-
 app.use('/api/v1/tasks', router)
-// get all the tasks
-// get a single task
-// create a new task
-// update a task
-// delete a task
+app.use(notFound);
 
 
 const start = async () => {
